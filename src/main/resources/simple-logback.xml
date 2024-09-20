@@ -1,0 +1,27 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- TODO: Define a condition, this is failing by default, need more work here -->
+    <if condition='property("spring.profiles.active").contains("dev")'>
+        <then>
+            <root level="DEBUG">
+                <appender-ref ref="CONSOLE"/>
+            </root>
+        </then>
+    </if>
+    <if condition='property("spring.profiles.active").contains("prod")'>
+        <then>
+            <root level="INFO">
+                <appender-ref ref="ROLLING_FILE"/>
+                <appender-ref ref="ASYNC_FILE"/>
+            </root>
+        </then>
+    </if>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
