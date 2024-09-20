@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService{
         ProductEntity productEntity
                 = productRepository.findById(id).get();
 
-        productEntity.setId(productDto.getId());
+        // productEntity.setId(productDto.getId()); never change the ID of the Entity.
         productEntity.setPrice(productDto.getPrice());
         productEntity.setProductName(productDto.getProductName());
         productEntity.setVolume(productDto.getVolume());

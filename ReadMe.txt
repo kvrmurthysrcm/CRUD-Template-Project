@@ -32,7 +32,7 @@ http GET http://localhost:9000/api/v1/products
 # Get product by ID:
 # URL: http://localhost:9000/api/v1/products/{ID}
 # run following command to test
-http GET http://localhost:9000/api/v1/products/2
+http GET http://localhost:9000/api/v1/products/7
 
 # Delete product by ID:
 http://localhost:9000/api/v1/products/{ID}
@@ -41,8 +41,10 @@ http DELETE http://localhost:9000/api/v1/products/2
 # Create Product:
 # Base URL: http POST http://localhost:9000/api/v1/products
 # Run the following to test creation of the product...
-http POST http://localhost:9000/api/v1/products productName='Cycle' price=20 wight=5 volume=4
+http POST http://localhost:9000/api/v1/products productName='Cycle' price=20 wight=5 volume=7
 
+# Update Product
+http PUT http://localhost:9000/api/v1/products/7 id=7 productName='Cycle' price=25 wight=15 volume=7
 
 
 
