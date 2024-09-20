@@ -1,6 +1,5 @@
 package com.productapi.controller;
 
-
 import com.productapi.dto.ProductDto;
 import com.productapi.service.ProductService;
 import org.springframework.web.bind.annotation.CrossOrigin;
