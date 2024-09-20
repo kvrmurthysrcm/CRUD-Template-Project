@@ -34,6 +34,12 @@ http -a KVRM:password GET http://localhost:9000/api/v1/products
 
 http -a KVRM:password POST http://localhost:9000/api/v1/token
 # Above command receives a token back from REST API
+eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiS1ZSTSIsImV4cCI6MTcyNjg0NDkwOSwiaWF0IjoxNzI2ODQxMzA5LCJzY29wZSI6IlJPTEVfVVNFUiJ9.ofP4ZC4GDg-AMNs8AyTsNosjADRL9_CpiXleZWojalqR1NMrgECqMRJSvrPmqYt7ozC2n3cKPRnaF_xXK1Nc9A_UVLV4nOBheWuANiRMFnPZxXxBV7n0ycFj1J5kQxDWXnKsjRRVpsfKiL67kQyxAachgVjdV8AAv-fA4Tv91qN44j1SPVYEi2345dnXtvOL1x1YuAadPcICVTSxGjtFkKK6ddaPCT1duwenmRBL-EaosV_RYRFUjGHAy-QGxWjQjHLSDVidR--X0_75d2KGlm8WW0qbhYmhUMgrDUxUlrJsH8yMgFJT1mXDYes456f0sSgFwp30i9PnX9VzsYwn6w
+# EX::  http -A bearer -a token pie.dev/bearer
+
+# following command is working to access the REST API end point using the TOEKN received.
+http -A bearer -a eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiS1ZSTSIsImV4cCI6MTcyNjg0NDkwOSwiaWF0IjoxNzI2ODQxMzA5LCJzY29wZSI6IlJPTEVfVVNFUiJ9.ofP4ZC4GDg-AMNs8AyTsNosjADRL9_CpiXleZWojalqR1NMrgECqMRJSvrPmqYt7ozC2n3cKPRnaF_xXK1Nc9A_UVLV4nOBheWuANiRMFnPZxXxBV7n0ycFj1J5kQxDWXnKsjRRVpsfKiL67kQyxAachgVjdV8AAv-fA4Tv91qN44j1SPVYEi2345dnXtvOL1x1YuAadPcICVTSxGjtFkKK6ddaPCT1duwenmRBL-EaosV_RYRFUjGHAy-QGxWjQjHLSDVidR--X0_75d2KGlm8WW0qbhYmhUMgrDUxUlrJsH8yMgFJT1mXDYes456f0sSgFwp30i9PnX9VzsYwn6w GET http://localhost:9000/api/v1/products
+
 
 # Get product by ID:
 # URL: http://localhost:9000/api/v1/products/{ID}
