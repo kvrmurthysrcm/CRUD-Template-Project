@@ -2,6 +2,8 @@ package com.productapi.config;
 
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -12,9 +14,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    Logger logger = LoggerFactory.getLogger("WebConfig.class");
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        System.out.println("Inside addCorsMappings()....");
+        logger.debug("Inside addCorsMappings()....");
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowedMethods("POST","GET","PUT", "DELETE")

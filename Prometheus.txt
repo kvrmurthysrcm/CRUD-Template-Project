@@ -1,0 +1,50 @@
+# 1. Added the following in the prometheus.yml file and started Prometheus server.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "CRUD-Template-Project"
+
+    scrape_interval: 5s
+
+    metrics_path: "/actuator/prometheus"
+
+    static_configs:
+      - targets: ["localhost:9000"]
+--------------------------------------------------------------------------------------------------------
+# 2. Added the following in application.properties in this project:
+management.endpoints.web.exposure.include=metrics,loggers,prometheus
+management.endpoint.loggers.enabled=true
+management.metrics.export.prometheus.enabled=true
+
+Prometheus scrapes data from this REST API using the urL: http://localhost:9000/actuator/prometheus
+http://localhost:9000/actuator/metrics provides data in JSON format which is not readable by Prometheus.
+----------------------------------------------------------------------------------------------------------
+# 3. Added the following in pom.xml:
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>
+----------------------------------------------------------------------------------------------------------
+# added the following in SecurityConfig.java:: securityFilterChain()...
+
+    .requestMatchers("/actuator").permitAll()
+    .requestMatchers("/actuator/metrics").permitAll()
+    .requestMatchers("/actuator/prometheus").permitAll()
+
+----------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+
+
