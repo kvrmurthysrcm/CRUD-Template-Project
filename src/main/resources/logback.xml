@@ -23,9 +23,16 @@
         </encoder>
     </appender>
 
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ROLLING_FILE"/>
     </root>
+    <!-- Package-level logging -->
+    <logger name="com.productapi.config" level="DEBUG" />
+    <logger name="com.productapi.service" level="INFO" />
+    <logger name="com.productapi.controller" level="DEBUG" />
+    <!-- Class-level logging -->
+    <logger name="com.productapi.controller.HomeController" level="DEBUG" />
 
+    <!-- "Log levels": [ "OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE" ] -->
 </configuration>

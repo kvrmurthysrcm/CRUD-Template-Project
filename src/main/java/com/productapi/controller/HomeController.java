@@ -57,10 +57,12 @@ public class HomeController {
     @GetMapping("/products")
     public List<ProductDto> getAllProducts(){
         List<ProductDto> products = productService.getAllProducts();
-//        System.out.println("0. @ getAllProducts()....." + products);
-//        logger.info("1. @ getAllProducts().....{}", products);
-//        logger.debug("2. @ getAllProducts().....{}", products);
-//        logger.warn("3. @ getAllProducts().....{}", products);
+        System.out.println("logger level: " + logger.isDebugEnabled());
+        System.out.println("logger level: " + logger);
+        logger.debug("0. @ getAllProducts().....{}", products);
+        logger.info("1. @ getAllProducts().....{}", products);
+        logger.debug("2. @ getAllProducts().....{}", products);
+        logger.warn("3. @ getAllProducts().....{}", products);
 //        logger.error("4. @ getAllProducts().....{}", products);
 //        logger.trace("5. @ getAllProducts().....{}", products);
         return products;

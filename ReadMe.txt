@@ -86,7 +86,7 @@ http://localhost:9000/actuator/loggers
 # the following is showing the current log level...run it from a CMD prompt...
 http -a KVRM:password GET http://localhost:9000/actuator/loggers/HomeController
 # Following command will update log level
-http -a KVRM:password POST http://localhost:9000/actuator/loggers/HomeController configuredLevel=INFO
+http -a KVRM:password POST http://localhost:9000/actuator/loggers/HomeController configuredLevel=DEBUG
 
 # Read the details from Prometheus.txt to find the setup details.
 

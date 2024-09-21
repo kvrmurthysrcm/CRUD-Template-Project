@@ -80,6 +80,7 @@ public class SecurityConfig {
                         .requestMatchers("/home").permitAll()
                         .requestMatchers("/loginn").permitAll()
                         .requestMatchers("/actuator").permitAll()
+                        .requestMatchers("/actuator/loggers/**").permitAll()
                         .requestMatchers("/actuator/metrics").permitAll()
                         .requestMatchers("/actuator/prometheus").permitAll()
                         .requestMatchers("/api/v1/token").permitAll()
