@@ -115,6 +115,13 @@
 			<version>3.0.0</version> <!-- Make sure the version matches your Spring Boot version -->
 		</dependency>
 		<!-- End of dependencies for Security -->
+
+		<!-- Also helps with logging modifications -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

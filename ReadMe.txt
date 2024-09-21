@@ -73,10 +73,20 @@ create unique index ix_auth_username on authorities (username,authority);
 # KVRM / password
 # admin / Myadmin#123
 
-# Added logback.xml to resource older, logs working now using the xml file.
+# Added logback.xml to configure logging, logs working now using the xml file.
 # console, file rotator, async logs are configured now.
+# logback-classic version 1.5.8
+# The ch.qos.logback.classic.jmx package was removed for security reasons and for lack of use since version 1.4
 
+# following URL display the logger in the JVM..
+http://localhost:9000/actuator/loggers
 
+# levels [ "OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE" ]
+
+# the following is showing the current log level...run it from a CMD prompt...
+http -a KVRM:password GET http://localhost:9000/actuator/loggers/HomeController
+# Following command will update log level
+http -a KVRM:password POST http://localhost:9000/actuator/loggers/HomeController configuredLevel=INFO
 
 
 

@@ -79,6 +79,7 @@ public class SecurityConfig {
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/home").permitAll()
                         .requestMatchers("/loginn").permitAll()
+                        .requestMatchers("/actuator").permitAll()
                         .requestMatchers("/api/v1/token").permitAll()
                         //.requestMatchers("/static/*").permitAll()
                         .anyRequest().authenticated())
