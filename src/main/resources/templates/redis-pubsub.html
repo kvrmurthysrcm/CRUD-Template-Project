@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Redis Pub-Sub</title>
+</head>
+<body>
+
+<div>
+    <form action="#" th:action="@{/redis/pubsub}" method="get">
+        <label> Publish Message using Redis: </label>
+        <input type="text" name="message" size="100"/> </br>
+
+        <button type="submit">Publish Message</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf Login Template</title>
+</head>
+<body>
+<div>
+    <P align="center"> <h2>User Login</h2></P>
+    <hr/>
+    <form action="#" th:action="@{/myui/login/save}" method="post" th:object="${userDto}">
+
+        <label> User name: </label>
+        <input type="text" th:field="*{userName}" /> </br>
+
+        <label> Password: </label>
+        <input type="password" th:field="*{password}" /> </br>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html>
