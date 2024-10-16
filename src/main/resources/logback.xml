@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="LOG_FILE" value="logs/CRUD-Template-log.log"/>
+
+    <!-- Define a ConsoleAppender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Define a RollingFileAppender -->
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>CRUD-Template-log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>CRUD-Template-log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10KB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Package-level logging -->
+    <logger name="com.productapi.config" level="DEBUG" />
+    <logger name="com.productapi.service" level="INFO" />
+    <logger name="com.productapi.controller" level="DEBUG" />
+    <logger name="com.com.netflix.discovery" level="WARN" />
+    <logger name="com.netflix.discovery.DiscoveryClient" level="WARN" />
+    <logger name="com.netflix.discovery.DiscoveryClient" level="WARN" />
+
+    <!-- Class-level logging -->
+    <logger name="com.productapi.controller.HomeController" level="DEBUG" />
+    <logger name="cDefaultListableBeanFactory" level="WARN" />
+
+    <!-- "Log levels": [ "OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE" ] -->
+</configuration>

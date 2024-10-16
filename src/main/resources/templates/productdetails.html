@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My first Thymeleaf Template</title>
+</head>
+<body>
+<p> Message expression from message.properties file:: <strong th:text = "#{application.hello}"></strong> </p>
+<p> Message expression from message.properties file:: <h2 th:text = "#{welcome.message}"></h2> </p>
+<hr/>
+
+<h2 > Product Details</h2>
+<hr/>
+<!-- TODO: Need to check if this Object is not null -->
+<div th:object="${productDto}">
+    <P> sing Selection Expression now to display the object variables! </P>
+    <P> ID: <strong th:text = "*{id}"> </strong></P>
+    <p> Product Name: <strong th:text = "*{productName}"></strong></p>
+    <p> Price: <strong th:text = "*{price}"></strong></p>
+    <p> Weight: <strong th:text = "*{wight}"></strong></p>
+    <p> Volume: <strong th:text = "*{volume}"></strong></p>
+</div>
+
+<hr/>
+
+</body>
+</html>

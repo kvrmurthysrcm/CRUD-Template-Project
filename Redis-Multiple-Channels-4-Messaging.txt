@@ -1,0 +1,126 @@
+To add more channels and listen on Redis in a Spring Boot application, you can use `RedisMessageListenerContainer` provided by Spring Data Redis. This allows you to subscribe to multiple Redis channels and listen for messages.
+
+Here’s how you can set it up:
+
+### 1. Add Redis Dependencies
+
+Ensure that you have the required Redis dependencies in your `pom.xml` (for Maven) or `build.gradle` (for Gradle):
+
+#### Maven:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
+
+#### Gradle:
+```gradle
+implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+```
+
+### 2. Redis Configuration
+
+You need to configure the `RedisMessageListenerContainer` bean in your configuration class to subscribe to channels.
+
+#### Redis Configuration Class:
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
+
+@Configuration
+public class RedisConfig {
+
+    @Bean
+    public RedisMessageListenerContainer redisContainer(RedisConnectionFactory connectionFactory,
+                                                        MessageListenerAdapter listenerAdapter1,
+                                                        MessageListenerAdapter listenerAdapter2) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+
+        // Add more channels/topics here
+        container.addMessageListener(listenerAdapter1, new PatternTopic("channel1"));
+        container.addMessageListener(listenerAdapter2, new PatternTopic("channel2"));
+
+        return container;
+    }
+
+    @Bean
+    public MessageListenerAdapter listenerAdapter1(MyRedisListener listener) {
+        return new MessageListenerAdapter(listener, "onMessageChannel1");
+    }
+
+    @Bean
+    public MessageListenerAdapter listenerAdapter2(MyRedisListener listener) {
+        return new MessageListenerAdapter(listener, "onMessageChannel2");
+    }
+}
+```
+
+### 3. Implement the Message Listener
+
+You can create a listener class to handle messages from multiple channels by defining methods for each channel.
+
+#### Listener Class:
+```java
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyRedisListener {
+
+    public void onMessageChannel1(String message, String channel) {
+        System.out.println("Received message from channel1: " + message);
+    }
+
+    public void onMessageChannel2(String message, String channel) {
+        System.out.println("Received message from channel2: " + message);
+    }
+}
+```
+
+### 4. Sending Messages to Redis Channels
+
+You can publish messages to Redis channels using `RedisTemplate`.
+
+#### Example of publishing a message:
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+
+@Service
+public class RedisPublisher {
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
+    public void publishToChannel1(String message) {
+        redisTemplate.convertAndSend("channel1", message);
+    }
+
+    public void publishToChannel2(String message) {
+        redisTemplate.convertAndSend("channel2", message);
+    }
+}
+```
+
+### 5. Configuration in `application.properties`
+
+If you haven’t set up Redis already, you need to configure the Redis server in your `application.properties` file.
+
+```properties
+spring.redis.host=localhost
+spring.redis.port=6379
+```
+
+### Summary
+
+- Use `RedisMessageListenerContainer` to listen on multiple channels.
+- Implement the message listener logic in separate methods for each channel.
+- Publish messages using `RedisTemplate`.
+
+This setup should allow you to listen on multiple Redis channels and handle the messages appropriately.

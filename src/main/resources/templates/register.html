@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf Header Template</title>
+    <style type="text/css">
+        label{
+            display: inline-block;
+            width: 200px;
+            margin: 5px;
+            text-align: left;
+        }
+        input[type=text], input[type=email], input[type=password] {
+            display: inline-block;
+            width: 200px;
+        }
+        button {
+            padding: 5px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <P align="center"> <h2>User Registration</h2></P>
+    <hr/>
+    <form action="#" th:action="@{/myui/register/save}" method="post" th:object="${userDto}">
+
+        <label> Full name: </label>
+        <input type="text" th:field="*{fullName}" /> </br>
+
+        <label> User name: </label>
+        <input type="text" th:field="*{userName}" /> </br>
+
+        <label> Password: </label>
+        <input type="password" th:field="*{password}" /> </br>
+
+        <label> Email: </label>
+        <input type="email" th:field="*{email}" /> </br>
+
+        <label> Phone: </label>
+        <input type="text" th:field="*{phone}" /> </br>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My first Thymeleaf Template</title>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="./css/output.css">
+    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="/output.css">
+    <link rel="stylesheet" href="output.css">
+</head>
+<body>
+<div th:insert="~{/header :: myuiheader}"></div>
+
+<h2 class="text-3xl font-bold" th:text="${message}"> </h2>
+<hr/>
+<!-- TODO: Need to check if this object is not null before printing.. -->
+<p class="p-2 bg-amber-100"> Message expression from message.properties file:: <strong th:text = "#{application.hello}"></strong> </p>
+<p class="p-2 bg-blue-100"> Message expression from message.properties file:: <h2 th:text = "#{welcome.message}"></h2> </p>
+<hr/> <hr/>
+<h2 > Product List</h2>
+<table >
+    <tr>
+        <td>S NO</td>
+        <td>ID</td>
+        <td>Product Name</td>
+        <td>Price</td>
+        <td>Weight</td>
+        <td>Volume</td>
+    </tr>
+    <tr>
+        <td colspan="6"><hr/>Display the object variables in a loop</td>
+    </tr>
+    <!-- TODO: Need to check if this list is not null -->
+    <tr th:each="productDto, productStatus: ${productDtos}">
+        <td th:text = "${productStatus.count}"></td>
+        <td th:text = "${productDto.id}"></td>
+        <td > <a th:href="@{/myui/products/{id}(id=${productDto.id})}" th:text = "${productDto.productName}">Product Details</a></td>
+
+        <td th:text = "${productDto.price}"></td>
+
+        <td th:text = "${productDto.wight}"></td>
+        <td th:text = "${productDto.volume}"></td>
+    </tr>
+    <tr>
+        <td colspan="6"><hr/>Using Selection Expression now to display the object variables in a loop</td>
+    </tr>
+    <!-- TODO: Need to check if this list is not null -->
+    <tr th:each="productDto, productStatus : ${productDtos}" th:class="${productStatus.even} ? 'Even' : 'ODD'">
+        <td th:text = "${productDto.id}"></td>
+        <td th:text = "${productDto.productName}"></td>
+        <td th:text="${productDto.price}"></td>
+        <td> <p> Weight: <strong th:text = "${productDto.wight}"></strong></p> </td>
+        <td> <p> Volume: <strong th:text = "${productDto.volume}"></strong></p></td>
+        <td th:if="${productStatus.even}">EVEN</td>
+        <td th:unless="${productStatus.even}">ODD</td>
+    </tr>
+
+    <tr>
+        <td colspan="6"><hr/></td>
+    </tr>
+</table>
+<hr/>
+<!-- TODO: Need to check if this object is not null -->
+
+<div th:object="${productDto1}" th:if="${productDto1 != null}">
+    <P> single object Selection Expression now to display the object variables! </P>
+    <P> ID: <strong th:text = "*{id}"> </strong></P>
+    <p th:if="${productDto1.id > 0}">
+        Valid product ID....
+    </p>
+    <p> Product Name: <strong th:text = "*{productName}"></strong></p>
+    <p> Price: <strong th:text = "*{price}"></strong></p>
+
+    <p> Weight: <strong th:text = "*{wight}"></strong></p>
+    <p> Volume: <strong th:text = "*{volume}"></strong></p>
+</div>
+
+<hr/>
+<table>
+    <tr>
+        <td>Index</td>
+        <td>Count</td>
+        <td>Size</td>
+        <td>First</td>
+        <td>Last</td>
+        <td>Even</td>
+        <td>Odd</td>
+
+        <td>Product ID</td>
+        <td>Product Name</td>
+        <td>Price</td>
+        <td>Weight</td>
+        <td>Volume</td>
+    </tr>
+    <!-- TODO: Need to check if this list is not null -->
+    <tr th:each="productDto, productStat: ${productDtos}" th:if="${productDtos != null}">
+        <td th:text = "${productStat.index}"></td>
+        <td th:text = "${productStat.count}"></td>
+        <td th:text = "${productStat.size}"></td>
+        <td th:text = "${productStat.first}"></td>
+        <td th:text = "${productStat.last}"></td>
+        <td th:text = "${productStat.even}"></td>
+        <td th:text = "${productStat.odd}"></td>
+
+        <td th:text = "${productDto.id}"></td>
+        <td th:text = "${productDto.productName}"></td>
+        <td th:text = "${productDto.price}"></td>
+        <td th:text = "${productDto.wight}"></td>
+        <td th:text = "${productDto.volume}"></td>
+    </tr>
+</table>
+<div th:insert="~{/footer :: myuifooter}"></div>
+</body>
+</html>
